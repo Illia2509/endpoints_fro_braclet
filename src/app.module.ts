@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataModule } from './data/data.module';
-import { ConfigModule } from '@nestjs/config';
-import { DataEntity } from './data/entities/data.entity';
+import { PulseEntity } from './data/entities/pulse.entity';
+import { SpO2Entity } from './data/entities/spo2.entity';
 
 @Module({
   imports: [
@@ -14,8 +15,8 @@ import { DataEntity } from './data/entities/data.entity';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [DataEntity],
-      synchronize: true, // Автоматичне створення таблиць (тільки для розробки!)
+      entities: [PulseEntity, SpO2Entity],
+      synchronize: true,
     }),
     DataModule,
   ],
